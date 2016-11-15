@@ -12,7 +12,7 @@
 
     function proceedsearch() {
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
+      $('.popup').fadeToggle();
     }
     // search function;
     var searchFunc = function(path, search_id, content_id) {
@@ -114,8 +114,8 @@
     });
 
     $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
+      $('.popup').fadeToggle();
+      $('.popoverlay').remove();
       $('body').css('overflow', '');
     });
     $('.popup').click(function(e){
