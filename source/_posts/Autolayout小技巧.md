@@ -1,5 +1,6 @@
 ---
 title: Autolayout小技巧
+categories: iOS
 tags:
   - iOS
 permalink: autolayoutxiao-ji-qiao

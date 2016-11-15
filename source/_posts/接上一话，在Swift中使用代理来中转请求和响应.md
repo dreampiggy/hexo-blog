@@ -1,5 +1,6 @@
 ---
 title: 接上一话，在Swift中使用代理来中转请求和响应
+categories: iOS
 tags:
   - iOS
   - Swift

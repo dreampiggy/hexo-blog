@@ -1,5 +1,6 @@
 ---
 title: 分享一下Java作业－Swing开发的计算器
+categories: Java
 tags:
   - Java
 permalink: fen-xiang-yi-xia-javazuo-ye-swingkai-fa-de-ji-suan-qi

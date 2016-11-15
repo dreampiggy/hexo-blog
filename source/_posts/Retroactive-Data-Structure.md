@@ -1,11 +1,13 @@
 ---
 title: Retroactive Data Structure
+categories: Code
 tags:
   - 数据结构
 permalink: retroactive-data-structure
 id: 27
 updated: '2016-03-30 02:34:16'
 date: 2016-03-30 02:30:31
+mathjax: true
 ---
 
 > MIT Open Course
@@ -76,6 +78,6 @@ which means after one insert or delete ,you can get `the query that change`
 Reference: [Retroactive Data Structures - ERIK D. DEMAINE, JOHN IACONO, STEFAN LANGERMAN][4]
 
  [1]: http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-851-advanced-data-structures-spring-2012/lecture-videos/session-2-retroactive-data-structures/
- [2]: http://dreampiggy-wordpress.stor.sinaapp.com/uploads/2015/11/屏幕快照-2015-11-04-上午10.51.02-e1446652422815.png
+ [2]: https://upload.wikimedia.org/wikipedia/commons/e/e5/Segment_tree_instance.gif
  [3]: https://github.com/lizhuoli1126/Functional.js#retroactivedata-structure
  [4]: http://erikdemaine.org/papers/Retroactive\_TALG/paper.pdf

@@ -1,10 +1,12 @@
 ---
 title: iOS开发学习-用继承，静态类封装方法
+categories: iOS
+tags:
+ - iOS
 permalink: ioskai-fa-xue-xi-yong-ji-cheng-jing-tai-lei-feng-zhuang-fang-fa
 id: 13
 updated: '2016-03-30 01:36:02'
 date: 2016-03-30 01:32:51
-tags:
 ---
 
 iOS开发中，如果不进行适当的封装，使用协议或者继承类来进行开发，你就会遇到传说中的ViewController（以后简称VC） Hell的问题……

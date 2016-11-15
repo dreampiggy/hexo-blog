@@ -1,5 +1,6 @@
 ---
 title: Core Graphics仿射变换知识
+categories: iOS
 tags:
   - iOS
   - Objective-C
@@ -8,6 +9,7 @@ permalink: core-graphicsfang-she-bian-huan
 id: 46
 updated: '2016-11-01 23:36:06'
 date: 2016-09-27 09:49:02
+mathjax: true
 ---
 
 > 这是补充记录关于CG的几何变换的一些知识，涉及到简单的矩阵变换

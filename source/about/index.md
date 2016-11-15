@@ -1,6 +1,8 @@
 ---
-title: about
+title: 关于
 date: 2016-11-14 23:31:03
+type: "about"
+comments: false
 ---
 
 > 迁移Again (2016/11/1)

@@ -1,5 +1,6 @@
 ---
 title: Java之暴力实现Parser Generator（序言）
+categories: Java
 tags:
   - Java
   - 编译原理
@@ -7,6 +8,7 @@ permalink: javazhi-bao-li-shi-xian-parser-generator-xu-yan
 id: 30
 updated: '2016-03-30 02:41:13'
 date: 2016-03-30 02:40:34
+mathjax: true
 ---
 
 > 编译原理已经学了很多了吧？还有所迷茫？那么今天跟着我一起学习如何暴力写一个Parser Generator
@@ -21,7 +23,7 @@ date: 2016-03-30 02:40:34
 
 迷糊了？举个例子，就是假如用户定义了这样一组CFG，用来匹配一个对于正整数的加法和乘法
 
-$ S \rightarrow TB \\ B \rightarrow TB \mid \epsilon \\ T \rightarrow FT^* \\ T^* \rightarrow * FT^* \\ F \rightarrow (S) \mid 0 \mid \dots \mid 9 $
+$ S \rightarrow TB \\ B \rightarrow TB \mid \epsilon \\ T \rightarrow FT^\* \\ T^\* \rightarrow \* FT^\* \\ F \rightarrow (S) \mid 0 \mid \dots \mid 9 $
 
 当然，数学符号肯定很好写，实际中输入大概是这样子的(\e表示epsilon)：
 

@@ -1,5 +1,6 @@
 ---
 title: iOS开发面试面试知识合集
+categories: iOS
 tags:
   - iOS
   - Objective-C

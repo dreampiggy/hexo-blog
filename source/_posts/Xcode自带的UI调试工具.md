@@ -1,5 +1,6 @@
 ---
 title: Xcode自带的UI调试工具
+categories: iOS
 tags:
   - iOS
   - Xcode

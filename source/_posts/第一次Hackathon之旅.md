@@ -1,5 +1,6 @@
 ---
 title: 第一次Hackathon之旅
+categories: Life
 tags:
   - Hackathon
 permalink: di-yi-ci-hackathonzhi-lu

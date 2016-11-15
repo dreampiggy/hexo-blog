@@ -1,5 +1,6 @@
 ---
 title: iOS开发中使用Swift来完成异步事件
+categories: iOS
 tags:
   - iOS
   - Swift

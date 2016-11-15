@@ -1,5 +1,6 @@
 ---
 title: 推荐一个Swift以及iOS开发的Git合集
+categories: iOS
 tags:
   - iOS
 permalink: tui-jian-yi-ge-swiftyi-ji-ioskai-fa-de-githe-ji

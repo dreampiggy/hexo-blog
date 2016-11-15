@@ -1,5 +1,6 @@
 ---
 title: Random Binary Search Tree －Treap
+categories: Code
 tags:
   - C++
   - 数据结构
@@ -7,17 +8,18 @@ permalink: random-binary-search-tree-treap
 id: 26
 updated: '2016-03-30 02:29:56'
 date: 2016-03-30 02:21:50
+mathjax: true
 ---
 
 ## BST插入顺序与平衡性
 
 众所周知，二查搜索树(BST)的搜索、插入、删除的复杂度等于树高，所以平衡度越高，越接近$ O(nlogn) $，越有序越退化为$ O(n) $
 
-![线性BST]![](http://7xsf4p.com1.z0.glb.clouddn.com/image/3/9f/4b2394fd756bcf2edcee109bb18ef.png)
-![随机BST]![](http://7xsf4p.com1.z0.glb.clouddn.com/image/e/a2/3419e63d7126ece4996634b3f7dad.png)
+![线性BST](http://7xsf4p.com1.z0.glb.clouddn.com/image/3/9f/4b2394fd756bcf2edcee109bb18ef.png)
+![随机BST](http://7xsf4p.com1.z0.glb.clouddn.com/image/e/a2/3419e63d7126ece4996634b3f7dad.png)
 
-*   对于左侧的BST来说，只有唯一的构造序列：$ <1,2,\dots,14> $
-*   但对于右侧的BST，可以存在21964800种不同序列
++ 对于左侧的BST来说，只有唯一的构造序列：$ <1,2,\dots,14> $
++ 但对于右侧的BST，可以存在21964800种不同序列
 
 也就是说，随即插入序列到二叉树所形成的平衡度，将大于部分有序插入所形成的二叉树
 
@@ -25,7 +27,7 @@ date: 2016-03-30 02:21:50
 
 对每个$ x \in{0,\ldots,{n}-1} $, x所需要的搜索长度（即深度）是 $ H\_{x+1} + H\_{n-x} - O(1) $
 
-对每个$ x \in(-1,n)\setminus{0,\ldots,n-1} $，x所需要的搜索长度是$ H\_{\lceil x \rceil} H\_{n-\lceil x \rceil} $
+对每个$ x \in(-1,n) $，x所需要的搜索长度是$ H\_{\lceil x \rceil} H\_{n-\lceil x \rceil} $
 
 ## Treap - Random BST实现
 

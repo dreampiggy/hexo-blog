@@ -1,5 +1,6 @@
 ---
 title: Objective-C ARC下block表现和关键字影响
+categories: iOS
 tags:
   - iOS
   - Objective-C

@@ -1,5 +1,6 @@
 ---
 title: 偶然发现的，关于C++指针的一点注意事项
+categories: C++
 tags:
   - C++
 permalink: ou-ran-fa-xian-de-guan-yu-c-zhi-zhen-de-yi-dian-zhu-yi-shi-xiang

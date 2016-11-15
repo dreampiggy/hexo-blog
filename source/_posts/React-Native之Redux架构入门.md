@@ -1,5 +1,6 @@
 ---
 title: React Native之Redux架构入门
+categories: iOS
 tags:
   - iOS
   - React Native

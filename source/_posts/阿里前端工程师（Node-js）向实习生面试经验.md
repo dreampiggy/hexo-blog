@@ -1,5 +1,6 @@
 ---
 title: 阿里前端工程师（Node.js）向实习生面试经验
+categories: Life
 tags:
   - 面试
 permalink: a-li-qian-duan-gong-cheng-shi-node-js-xiang-shi-xi-sheng-mian-shi-jing-yan

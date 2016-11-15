@@ -1,5 +1,6 @@
 ---
 title: Web入门后端架构有感——Node.js
+categories: Web
 tags:
   - Node.js
   - JavaScript

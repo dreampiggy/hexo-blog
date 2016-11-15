@@ -1,5 +1,6 @@
 ---
 title: Promise大法好
+categories: JavaScript
 tags:
   - JavaScript
   - 异步

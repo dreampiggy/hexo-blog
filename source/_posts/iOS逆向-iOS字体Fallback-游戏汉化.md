@@ -1,5 +1,6 @@
 ---
 title: iOS逆向&iOS字体Fallback&游戏汉化
+categories: iOS
 tags:
   - iOS
   - 逆向

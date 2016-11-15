@@ -1,5 +1,6 @@
 ---
 title: 发誓我不写Monad教程
+categories: JavaScript
 tags:
   - JavaScript
   - FP

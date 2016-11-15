@@ -1,5 +1,6 @@
 ---
 title: Web幻灯片利器（前端工程师福利）——NodePPT
+categories: Web
 tags:
   - Web
   - 前端
