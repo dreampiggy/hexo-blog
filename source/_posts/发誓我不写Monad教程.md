@@ -3,7 +3,7 @@ title: 发誓我不写Monad教程
 categories: JavaScript
 tags:
   - JavaScript
-  - FP
+  - Functional
 permalink: fa-shi-wo-bu-xie-monadjiao-cheng
 id: 25
 updated: '2016-03-30 02:21:28'
