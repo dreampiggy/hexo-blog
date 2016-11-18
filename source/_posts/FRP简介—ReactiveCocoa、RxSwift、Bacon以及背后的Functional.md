@@ -23,7 +23,7 @@ userCell.configureWithUser(user)
 
 MVP架构或许是你的救星，不过实际上，MVP只是一个工程化的解决问题，把Massive View Controller变成Massive View Presenter，带来相对明确的架构分层的副作用就是近乎两倍的代码量。而在这种情况下，MVVM的架构就是一个非常大的突破，和MVP一样把View/ViewController扔到一起，但是引入单独的ViewModel，通过View到ViewModel的单向绑定，ViewModel对Model的订阅，既避免了MVC造成的代码混乱，又减少了MVP的造成的重复代码。而实践上，提到MVVM，就得 提到[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa)或者[RxSwift](https://github.com/ReactiveX/RxSwift)，这两者都是FRP的GUI框架实现。
 
-### ReactiveCocoa
+## ReactiveCocoa
 
 > 为了统一术语，ReactiveCocoa中的概念这里都描述成Rx中类似的概念，本质上都是一样的东西
 
@@ -90,7 +90,7 @@ RAC(self.passwordTextField, backgroundColor) =
 
 简单来看，ReactiveCocoa真不愧是Cocoa，所有的设计围绕Cocoa的设计模式，提供了方便的宏，并且弱化了泛函概念，提供了很多副作用处理的方式，不像Rx那样纯粹。然而随着Objective-C语言的慢慢淡化，整个项目之后也转为依赖ReactiveSwift的实现。在当前iOS开发的情况下，如果使用Objective-C语言，那么这就是不二的FRP之选。但是如果使用Swift，最好使用正统的RxSwift。
 
-### RxSwift
+## RxSwift
 
 ![](http://7xsf4p.com1.z0.glb.clouddn.com/image/marble_diagrams_intro--no_text.png)
 
@@ -157,7 +157,7 @@ let both = plus.merge(minus)
 
 下面这些内容，默认为已经掌握了上述简单理解，如果看不太懂可以回过头重新看一下对应的Functional知识
 
-### ReactiveX
+## ReactiveX
 
 Rx的`Observable`的本质就是一个`Event Monad`，即上下文（就是图文教程中包裹的盒子）为Event的一个Monad，这里的Event定义，可以对应语言的struct或者enum，包括了`next`、`error`和`complete`三个上下文即可。这里截取的是Swift语言的实现，`map`方法实现拆装箱（类似Optional，即Haskell的Maybe）
 
@@ -240,7 +240,7 @@ let subscription = primeTextField.rx.text           // Observable<String>
 ```
 
 
-### Promise / Future
+## Promise / Future
 Promise本质上也是一个`Monad`，包裹的上下文就是`resolve`和`reject`。
 你可能反驳说`Promise.then(f)`中的`f`，可以是`value => value`，而并不是一个被Promise包裹的类型啊。但是实际上，由于JavaScript类型的动态性，Promise.then中直接返回value类型是个语法糖罢了，实际上会处理为`value => Promise.resolve(value)`
 
