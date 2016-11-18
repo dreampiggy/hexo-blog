@@ -4,7 +4,7 @@ categories: Code
 tags:
   - JavaScript
   - iOS
-  - FP
+  - Functional
 permalink: jian-dan-de-fpzhong-si-xiang-zai-shi-ji-xiao-xiang-mu-zhong-de-ying-yong
 id: 18
 updated: '2016-03-30 01:50:11'
