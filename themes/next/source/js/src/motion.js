@@ -269,7 +269,6 @@ $(document).ready(function () {
 
       function postMotion () {
         var postMotionOptions = window.postMotionOptions || {
-            stagger: 100,
             drag: true
           };
         postMotionOptions.complete = function () {
