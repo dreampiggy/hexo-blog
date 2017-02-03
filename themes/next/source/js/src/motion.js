@@ -281,7 +281,8 @@ $(document).ready(function () {
     },
 
     sidebar: function (integrator) {
-      if (CONFIG.sidebar.display === 'always') {
+      var pathname = window.location.pathname;
+      if (CONFIG.sidebar.display === 'always' || pathname === '/' || pathname === '/index.html') {
         NexT.utils.displaySidebar();
       }
       integrator.next();

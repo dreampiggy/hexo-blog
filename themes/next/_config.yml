@@ -2,8 +2,8 @@
 # Site Information Settings
 # ---------------------------------------------------------------
 
-# Put your favicon.ico into `hexo-site/source/` directory.
-favicon: /favicon.ico
+# Put your favicon.ico into `hexo-site/source/$favicon` directory. This value used to specify folder path
+favicon: /favicon
 
 # Set default keywords (Use a comma to separate)
 keywords: "追梦的小猪, DreamPiggy, iOS, Web"
