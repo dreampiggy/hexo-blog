@@ -276,6 +276,16 @@ mathjax:
 # Hypercomments
 #hypercomments_id:
 
+# Gitment
+# Introduction: https://imsun.net/posts/gitment-introduction/
+gitment:
+  enable: true
+  githubID: dreampiggy
+  repo: hexo-blog
+  ClientID: 783d0f6afbe6385e00fe
+  ClientSecret: f81f39b4cfd3863053adcc93a9d506c1963a8f22
+  lazy: false
+
 # Baidu Share
 # Available value:
 #    button | slide
