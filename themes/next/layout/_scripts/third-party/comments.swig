@@ -1,3 +1,5 @@
-{% include './comments/disqus.swig' %}
-{% include './comments/hypercomments.swig' %}
-{% include './comments/gitment.swig' %}
+{% if page.comments %}
+  {% include './comments/disqus.swig' %}
+  {% include './comments/hypercomments.swig' %}
+  {% include './comments/gitment.swig' %}
+{% endif %}

@@ -7,6 +7,7 @@
     <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     {% if not theme.gitment.lazy %}
         <script type="text/javascript">
+            var gitment_container = document.getElementById("gitment-container");
             var gitment = new Gitment({
                 id: document.location.href, 
                 owner: '{{owner}}',
@@ -15,13 +16,17 @@
                     client_id: '{{cid}}',
                     client_secret: '{{cs}}',
                 }});
-            gitment.render('gitment-container');
+            if (gitment_container) {
+                gitment.render('gitment-container');
+            }
         </script>
     {% else %}
         <script type="text/javascript">
             function ShowGitment(){
-                document.getElementById("gitment-display-button").style.display = "none";
-                document.getElementById("gitment-container").style.display = "block";
+                var gitment_container = document.getElementById("gitment-container");
+                var gitment_display_button = document.getElementById("gitment-display-button");
+                gitment_display_button.style.display = "none";
+                gitment_container.style.display = "block";
                 var gitment = new Gitment({
                     id: document.location.href, 
                     owner: '{{owner}}',
@@ -30,7 +35,9 @@
                         client_id: '{{cid}}',
                         client_secret: '{{cs}}',
                     }});
-                gitment.render('gitment-container');
+                if (gitment_container) {
+                    gitment.render('gitment-container');
+                }
             }
         </script>
     {% endif %}
