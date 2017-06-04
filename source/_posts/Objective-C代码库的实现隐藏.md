@@ -265,7 +265,7 @@ tags:
 
 示例：
 
-```
+```objectivec
 - (NSString *)name
 {
     NSString *name = __GET_PROPERTY(name);
@@ -314,7 +314,7 @@ Objective-C没有真正意义上的私有方法，毕竟是C语言的超集嘛�
 
 我们可以把想要隐藏的私有方法，全部放到一个Private Category里面，库内部其他需要操作的地方，引用这个头文件即可。
 
-```
+```objectivec
 // Person+Private.h
 
 @interface Person (Private)
