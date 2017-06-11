@@ -57,7 +57,7 @@ tags:
 ```
 
 # 隐藏私有属性
-但是很多时候，我们希望一些属性是私有的，即类实现处和引入了Private Header的地方才可以访问。或者我们希望一些readonly的属性，只有引入了Private Header的人才可以readwrite，这种时候就需要采取别的方式了。常见的方法是通过类扩展（主要针对类的实现文件可见）或者使用关联对象（主要针对类的实现文件不可见，如其他第三方库的类）两种方式。
+但是很多时候，我们希望一些属性是私有的，即类实现处和引入了Private Header的地方才可以访问。这种时候就需要采取别的方式了。常见的方法是通过类扩展（主要针对类的实现文件可见）或者使用关联对象（主要针对类的实现文件不可见，如其他第三方库的类）两种方式。
 
 ## 类扩展（Class Extension）
 ### 通常情形
@@ -67,7 +67,7 @@ tags:
 // Person+Private.h
 @interface Person ()
 
-@property (nonatomic, strong, readwrite) NSString *privateID;
+@property (nonatomic, strong) NSString *privateID;
 
 @end
 ```
@@ -75,7 +75,7 @@ tags:
 
 ### 自定义存取方法
 
-对于通常case来说，这是非常好的解决方法（不用任何额外代码）。但是有一个问题，如果你想**自定义这个属性的存取方法**（比如，实例变量的惰性初始化），那就会遇到问题。因为属性合成的ivar，是只在实现中可访问的，而类的实现只能实现一次（在原始的`Person.m`中实现）。试想一下这样子的情况，就会出现编译错误：
+对于通常case来说，这是非常好的解决方法（不用任何额外代码）。但是有一个问题，如果你想**自定义这个属性的存取方法**（比如，实例变量的惰性初始化），那就会遇到问题。因为属性合成的ivar，是只在类本身实现中创建的，在Category中无法创建，而且类的实现只能实现一次（在原始的`Person.m`中实现）。试想一下这样子的情况，就会出现编译错误：
 
 ```objectivec
 // Person+Private.m
@@ -93,14 +93,14 @@ tags:
 
 **第一种解决方案：**
 
-最简单的方式，就是直接把自定义的存取方法写在类本身实现文件中，然后在Category中用`@dynamic`来标记这个属性。自定义存取方式就和普通的写法一模一样。这相当于是一种把内部属性暴露出来的方法。不过容易导致耦合（因为其实我们的私有属性目标是用于和外部类交互的，不希望放到Private Category以外）。
+最简单的方式，就是直接把自定义的存取方法写在类本身实现文件中，然后在Category中暴露头文件，并用`@dynamic`来标记这个属性（否则由于Category看不到编译器自动生成的getter和setter会报warning）。自定义存取方式就和普通的写法一模一样。这相当于是一种把内部属性暴露出来的方法。不过容易导致耦合（因为其实我们的私有属性目标是用于和外部类交互的，不希望放到Private Category以外）。
 
 ```objectivec
 //Person.m
 
 @interface Person ()
 
-@property (nonatomic, strong, readwrite) NSString *privateID;
+@property (nonatomic, strong) NSString *privateID;
 
 @end
 
@@ -114,6 +114,13 @@ tags:
     
     return _privateID;
 }
+
+@end
+
+//Person+Private.h
+@interface Person (Private)
+
+@property (nonatomic, strong) NSString *privateID;
 
 @end
 
@@ -134,7 +141,7 @@ tags:
     NSString *_privateID;
 }
 
-@property (nonatomic, strong, readwrite) NSString *privateID;
+@property (nonatomic, strong) NSString *privateID;
 
 @end
 
@@ -164,7 +171,7 @@ tags:
 
 @interface Person (Private)
 
-@property (nonatomic, strong, readwrite) NSString *privateID;
+@property (nonatomic, strong) NSString *privateID;
 
 @end
 
