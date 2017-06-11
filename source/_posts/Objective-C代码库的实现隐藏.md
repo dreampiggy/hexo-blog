@@ -60,6 +60,7 @@ tags:
 但是很多时候，我们希望一些属性是私有的，即类实现处和引入了Private Header的地方才可以访问。或者我们希望一些readonly的属性，只有引入了Private Header的人才可以readwrite，这种时候就需要采取别的方式了。常见的方法是通过类扩展（主要针对类的实现文件可见）或者使用关联对象（主要针对类的实现文件不可见，如其他第三方库的类）两种方式。
 
 ## 类扩展（Class Extension）
+### 通常情形
 类扩展，不同于Category，最大的优势在于可以直接添加实例变量ivar到类的本身实现中，而Category是无法添加实例变量的。而在类扩展中声明的属性，也可以自动在编译期合成，同普通类声明属性的方式相同，不了解的参见：[CustomizingExistingClasses](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html)。因此，实际上类扩展非常适合隐藏私有属性。
 
 ```objectivec
@@ -70,6 +71,9 @@ tags:
 
 @end
 ```
+
+
+### 自定义存取方法
 
 对于通常case来说，这是非常好的解决方法（不用任何额外代码）。但是有一个问题，如果你想**自定义这个属性的存取方法**（比如，实例变量的惰性初始化），那就会遇到问题。因为属性合成的ivar，是只在实现中可访问的，而类的实现只能实现一次（在原始的`Person.m`中实现）。试想一下这样子的情况，就会出现编译错误：
 
@@ -87,7 +91,42 @@ tags:
 }
 ```
 
-这时候，聪明的你自然会想到，直接在类扩展中声明一个ivar不就行了，于是这样写，但是这会出现一个编译警告：
+**第一种解决方案：**
+
+最简单的方式，就是直接把自定义的存取方法写在类本身实现文件中，然后在Category中用`@dynamic`来标记这个属性。自定义存取方式就和普通的写法一模一样。这相当于是一种把内部属性暴露出来的方法。不过容易导致耦合（因为其实我们的私有属性目标是用于和外部类交互的，不希望放到Private Category以外）。
+
+```objectivec
+//Person.m
+
+@interface Person ()
+
+@property (nonatomic, strong, readwrite) NSString *privateID;
+
+@end
+
+@implementation Person
+
+- (NSString *)privateID
+{
+    if (!_privateID) {
+        _privateID = @"foo";
+    }
+    
+    return _privateID;
+}
+
+@end
+
+//Person+Private.m
+@implementation Person (Private)
+@dynamic privateID;
+
+@end
+```
+
+**第二种解决方案：**
+
+当然，聪明的你自然会想到，既然Category没法定义ivar，那直接在类扩展中声明一个ivar不就行了。于是你可以这样写，但是这会出现一个编译警告：
 
 ```objectivec
 // Person+Private.h
@@ -113,7 +152,7 @@ tags:
 }
 ```
 
-由于在类扩展中已经定义了属性，那么这个类在编译期间会自动合成存取方法，而在Private Category中覆盖就会覆盖本身合成的方法（虽然我们确实需要这样），但由于可以在多处定义Category，并且方法覆盖的顺序不定，无法保证你的存取方法就是真实想要的，所以这是编译警告。对于这种需要自定义存取方法的私有属性的case，应该在类扩展中定义ivar，在Private Category中定义属性并实现。注意由于在类扩展定义了ivar，但不会自动生成getter+setter，一旦你想要自定义存取方法，**需要同时定义setter和getter**（如果不用自定义，直接在类扩展中声明属性即可）
+由于在类扩展中已经定义了属性，那么这个类在编译期间会自动合成存取方法，而在Private Category中覆盖就会覆盖本身合成的方法（虽然我们确实需要这样），但由于可以在多处定义Category，并且方法覆盖的顺序不定，无法保证你的存取方法就是真实想要的，所以这是编译警告。对于这种需要自定义存取方法的私有属性的case，应该在类扩展中定义ivar，在Private Category中定义属性并实现。注意由于在类扩展定义了ivar，不会自动生成getter+setter，**需要自行同时定义setter和getter**，注意对不同属性修饰符，比如`copy`的话setter需要用`[-copy]`，`weak`的话ivar要标注`__weak`等。
 
 ```objectivec
 // Person+Private.h
@@ -360,8 +399,8 @@ tags:
 }
 ```
 
-### 惰性初始化
-惰性初始化只有在第一次调用getter的时候，才会初始化属性，写法上和普通的ivar写法基本类似。这里就不用`_name`来操作ivar，而是通过setter（当然也能用`__SET_* `宏来直接操作关联对象）就可以了。
+### 自定义存取方法
+自定义存取方法一般类的属性写法类似。比如说想要惰性初始化（即只有在第一次调用getter的时候，才会初始化属性）这里就不用`_name`来操作ivar，而是通过setter（当然也能用`__SET_* `宏来直接操作关联对象）就可以了。
 
 示例：
 
