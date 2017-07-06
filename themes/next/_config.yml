@@ -281,7 +281,7 @@ mathjax:
 gitment:
   enable: true
   githubID: dreampiggy
-  repo: hexo-blog
+  repo: dreampiggy.github.io
   ClientID: 783d0f6afbe6385e00fe
   ClientSecret: f81f39b4cfd3863053adcc93a9d506c1963a8f22
   lazy: false
