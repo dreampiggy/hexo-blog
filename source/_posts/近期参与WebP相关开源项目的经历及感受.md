@@ -51,7 +51,7 @@ YYImage通过一个抽象层YYImageFrame，来把GIF、APNG和Animated WebP三�
 
 [apng2webp](https://github.com/Benny-/apng2webp)是一个转换APNG到Animated WebP图片的命令行工具，使用Python脚本 + 外部命令行工具来实现。在之前的工作中，用到了来优化APNG的大小，并且产出Animated WebP来让客户端使用。
 
-说实在的，APNG这个规范由于没有进入到PNG标准规范中，一直处于一个不温不火的地步，网上的APNG动图数量也不多，很多网页的PNG图片上传也不支持。虽然如今各大浏览器都对APNG提供了支持（Chrome 58正式支持了APNG，而iOS从8.0支持，FireFox就是亲爹），但是客户端上，Android没有相对靠谱的解码和渲染组件能够使用。反倒是Animated WebP借助Google亲爹推动，成为Android天生支持的图像格式，并且iOS上也有YYImage来提供支持。随着WebP的流行，越来越多设备估计都会支持WebP和Animated WebP，甚至最终超越GIF这个广为流行，但是已有30年历史，只支持256色和1位alpha通道的古老动图格式。
+说实在的，APNG这个规范由于没有进入到PNG标准规范中，一直处于一个不温不火的地步，网上的APNG动图数量也不多，很多网页的PNG图片上传也不支持。虽然如今各大浏览器都对APNG提供了支持（Chrome 59正式支持了APNG，而iOS从8.0支持，FireFox就是亲爹），但是客户端上，Android没有相对靠谱的解码和渲染组件能够使用。反倒是Animated WebP借助Google亲爹推动，成为Android天生支持的图像格式，并且iOS上也有YYImage来提供支持。随着WebP的流行，越来越多设备估计都会支持WebP和Animated WebP，甚至最终超越GIF这个广为流行，但是已有30年历史，只支持256色和1位alpha通道的古老动图格式。
 
 这次对apng2webp项目，主要是贡献了两个功能。
 
