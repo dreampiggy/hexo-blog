@@ -1,5 +1,5 @@
 ---
-title: 近期参与WebP相关开源项目的经历及感受
+title: 近期参与的APNG和WebP开源项目的经历及感受
 date: 2017-07-25 22:44:10
 categories: Code
 tags:
