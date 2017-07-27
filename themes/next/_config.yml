@@ -278,12 +278,12 @@ mathjax:
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-#livere_uid: your uid
+livere_uid: MTAyMC8yOTc4NC82MzUw
 
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
 gitment:
-  enable: true
+  enable: false
   githubID: dreampiggy
   repo: dreampiggy.github.io
   ClientID: 783d0f6afbe6385e00fe
