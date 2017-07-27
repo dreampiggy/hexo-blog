@@ -51,14 +51,6 @@ CMD ["npm", "start"]
 > Ghost的优点
 
 + 完全支持GitHub Markdown语法，对熟悉GitHub的md格式的人很方便
-```markdown
- ```c++
- #include <iostream>
- int main(){
-     cout<<"Hello Ghost!";
- }
- ```
-```
 
 + 方便集成[Disqus](http://www.disqus.com)，告别国内多说的各种推广广告，而且国际通用，自动同步，很不错
 
@@ -71,16 +63,21 @@ $$ \latex $$ 来单独块渲染
 
 + 完善代码着色
 采取了[Prismjs](http://prismjs.com)来支持超级全面的代码着色，无论是
+
 ```swift
 print("Hello Swift")
 ```
+
 还是
+
 ```haskell
 qsort :: (Ord a Bool) => [a] -> [a]
 qsort [] = []
 qsort (x:xs) = qsort (filter (<= x) xs) ++ [x] ++ qsort (filter (> x) xs)
 ```
+
 更可能是
+
 ```nasm
 section     .text
 global      _start                              ;must be declared for linker (ld)
@@ -101,6 +98,7 @@ section     .data
 msg     db  'Hello, world!',0xa                 ;our dear string
 len     equ $ - msg                             ;length of our dear string
 ```
+
 都能正确着色，还有语言名提示和其他插件支持，非常爽
 
 + 图片存储和邮箱
