@@ -20,6 +20,8 @@
       </div>
     {% elseif theme.hypercomments_id %}
       <div id="hypercomments_widget"></div>
+    {% elseif theme.livere_uid %}
+      <div id="lv-container" data-id="city" data-uid="{{ theme.livere_uid }}"></div>
     {% elseif theme.gitment.enable %}
       {% if theme.gitment.lazy %}
         <div onclick="ShowGitment()" id="gitment-display-button">{{ __('gitmentbutton') }}</div>
