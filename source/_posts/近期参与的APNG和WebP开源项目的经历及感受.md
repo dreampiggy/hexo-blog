@@ -89,7 +89,7 @@ YYImage通过一个抽象层YYImageFrame，来把GIF、APNG和Animated WebP三�
 
 # iSparta
 
-[iSparta](https://github.com/dreampiggy/iSparta)是一个图形化的APNG和WebP转换工具，包含了很多功能（APNG合成，WebP转换，图片压缩等），虽说是开源项目，但是上一次提交已经是三年前了。而我最希望的APNG转换Animated WebP功能却没有实现（这也难怪，三年前Animated WebP规范还没出来）。大概看了一眼，使用的是[NW.js](https://nwjs.io/)（其实用的是改名前叫做`node-webkit`的东西），是一个和[Electron](https://electron.atom.io/)类似的，使用前端技术栈来构建跨平台应用的框架，本质上都是一个Chromium的运行环境来提供渲染，再加上node.js来提供JS Runtime。上手相对容易。
+[iSparta](https://github.com/iSparta/iSparta)是一个图形化的APNG和WebP转换工具，包含了很多功能（APNG合成，WebP转换，图片压缩等），虽说是开源项目，但是上一次提交已经是三年前了。而我最希望的APNG转换Animated WebP功能却没有实现（这也难怪，三年前Animated WebP规范还没出来）。大概看了一眼，使用的是[NW.js](https://nwjs.io/)（其实用的是改名前叫做`node-webkit`的东西），是一个和[Electron](https://electron.atom.io/)类似的，使用前端技术栈来构建跨平台应用的框架，本质上都是一个Chromium的运行环境来提供渲染，再加上node.js来提供JS Runtime。上手相对容易。
 
 基本上的目标，是为了提供更好的GUI工具，因此主要就参考了一下iSparta的Issue，解决这几个问题：
 
