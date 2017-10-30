@@ -24,6 +24,10 @@ tags:
 
 这样的话，在内存中，一般就可以用`uint8_t bitmap[width * components * 8][height]`来表示。
 
+有了这样的知识，对照着就能看懂CGImage的BitmapInfo所表示的信息了。
+
+![Bitmap的表示](https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/Art/colorformatrgba32.gif)
+
 ## 静态图
 只要Bitmap数据到手，后面的过程其实都大同小异。第三方解码器主要处理图像编码数据到原始Bitmap的解码过程，后续就可以通过固定的方式来得到CGImage或者UIImage，用于上层UI组件的渲染。
 

@@ -141,7 +141,7 @@ UIImage *animatedImage = [UIImage animatedImageWithImages:images duration:totalD
 
 这样处理的话，大部分情况下基本是可以接受的。但是这里有一个坑：UIImage这个animatedImages的接口，只会根据你传入的images的数量，平均分配传入的totalDuration的展示时长。但是大部分动图格式（GIF，APNG，WebP等等），都是不同帧不同时长的，这就会导致最后看到的动图每帧时长乱掉。
 
-对于这个的解决方式也有。简单来说，就是通过对特定图像帧重复特定次数，以填充满整个应该播放的时长。其实实现也比较简单，我们可以对所有帧的时长，求一个最大公约数`gcd`，这样的话，只需要每帧重复播放`duration / gcd`次数，最终的总时长各帧`repeat * duraion`的和，就可以实现这个了。
+对于这个的解决方式也有。简单来说，就是通过对特定图像帧重复特定次数，以填充满整个应该播放的时长。其实实现也比较简单，我们可以对所有帧的时长，求一个最大公约数`gcd`，这样的话，只需要每帧重复播放`duration / gcd`次数，最终的总时长各帧`repeat * duraion`的和，就可以实现这个了，有兴趣可以看看我参与维护的[SDWebImage的代码](https://github.com/rs/SDWebImage/blob/4.1.2/SDWebImage/UIImage%2BWebP.m#L281=L294)。
 
 示例代码：
 
@@ -160,7 +160,11 @@ for (size_t i = 0; i < frameCount; i++) {
 ## 渐进式解码
 渐进式解码（Progressive Decoding），即不需要完整的图像流数据，允许解码部分帧（大部分情况下，会是图像的部分区域），对部分使用了渐进式编码的格式（参考：[渐进式编码](https://en.wikipedia.org/wiki/Interlacing_\(bitmaps)），则更可以解码出相对模糊但完整的图像。
 
-比如说，JPEG支持三种方式的渐进式编码，包括baseline，scanline，以及progressive（参考：[iOS 处理图片的一些小 Tip](https://blog.ibireme.com/2015/11/02/ios_image_tips/)。
+比如说，JPEG支持三种方式的渐进式编码，包括Baseline，interlaced，以及progressive（参考：[iOS 处理图片的一些小 Tip](https://blog.ibireme.com/2015/11/02/ios_image_tips/))
+
+Baseline | Interlaced | Progressive
+:-: | :-: | :-:
+![](https://blog.ibireme.com/wp-content/uploads/2015/11/image_baseline.gif) | ![](https://blog.ibireme.com/wp-content/uploads/2015/11/image_interlaced.gif) | ![](https://blog.ibireme.com/wp-content/uploads/2015/11/image_progressive.gif)
 
 对于Image/IO的渐进式解码，其实和静态图解码的过程类似。但是第一步创建CGImageSource时，需要使用专门的`CGImageSourceCreateIncremental`方法，之后每次有新的数据（下载或者其他流输入）输入后，需要使用`CGImageSourceUpdateData`（或者`CGImageSourceUpdateDataProvider`）来更新数据。注意这个方法需要每次传入所有至今为止解码的数据，不仅仅是当前更新的数据。
 
