@@ -12,7 +12,7 @@ tags:
 
 [vImage](https://developer.apple.com/library/content/documentation/Performance/Conceptual/vImage/Introduction/Introduction.html)是Apple的Accelerate库的一部分，侧重于高性能的图像Bitmap级别的处理。库本身全部是C的接口，而且不同于Core系列的（Core Graphics/Core Foundation）C接口，是比较贴近传统C语言的接口，很多地方需要自己手动分配内存。
 
-vImage按照功能，可以分为Alpha Compositing（Alpha合成）、Geometry（几何变换）、Conversion（色彩转换）、Convolution（卷积，用于图像滤镜）Morphology（形态学处理，包括）等。这里主要介绍的，就是色彩转换，Alpha合成，以及几何变换的内容。
+vImage按照功能，可以分为Alpha Compositing（Alpha合成）、Geometry（几何变换）、Conversion（色彩转换）、Convolution（卷积，用于图像滤镜）Morphology（形态学处理）等。这里主要介绍的，就是色彩转换，Alpha合成，以及几何变换的内容。
 
 首先需要对vImage的基本接口有所了解，会有这几个概念：
 
