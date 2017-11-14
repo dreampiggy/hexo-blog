@@ -279,7 +279,7 @@ vImage对旋转也提供了一个非常方便的API，角度是弧度值，按�
 
 ## 错切
 
-![](https://raw.githubusercontent.com/dreampiggy/vImageProcessor/master/Example/Screenshot/Screenshot3.png)
+![错切](https://raw.githubusercontent.com/dreampiggy/vImageProcessor/master/Example/Screenshot/Screenshot3.png)
 
 [错切](https://en.wikipedia.org/wiki/Shear_mapping)是一种特殊的线性变换，直观的介绍可以从Wikipedia上看，也可以参考之前的另一篇教程。主要的参数有一个m值，表示对应参考坐标的缩放倍数。
 
