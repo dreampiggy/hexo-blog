@@ -75,7 +75,7 @@ $ \begin{bmatrix} x & y & 1 \end{bmatrix} \times \begin{bmatrix} \cos \theta & \
 
 推导过程：
 
-![](http://7xsf4p.com1.z0.glb.clouddn.com/image/4/ef/04946d0b15517c28f52f8aaf7a850.png)
+![](http://dreampiggy-image.test.upcdn.net/image/4/ef/04946d0b15517c28f52f8aaf7a850.png)
 
 $ P = (x,y) = (r\cos A , r\sin A) \\\ P^{'} = (r \cos B, r \sin B) = (r\cos(A + \theta), r\sin(A + \theta)) \\\ r\cos(A + \theta) = r\cos A \cos \theta - r\sin A \sin \theta = x \cos \theta - y \sin \theta \\\ r\sin(A + \theta) = r\sin A \cos \theta + r\cos A \sin \theta = y \cos \theta + x \sin \theta \\\ \therefore M = \begin{bmatrix} \cos \theta & \sin \theta & 0 \\\ - \sin \theta & \cos \theta & 0 \\\ 0 & 0 & 1 \end{bmatrix} $
 

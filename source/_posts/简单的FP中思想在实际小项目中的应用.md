@@ -42,7 +42,7 @@ println(name)
 println(sortArrayByClosure)
 ```
 
-![](http://7xsf4p.com1.z0.glb.clouddn.com/image/f/fa/c2499a9bce100ff9e18f392609d5d.png)
+![](http://dreampiggy-image.test.upcdn.net/image/f/fa/c2499a9bce100ff9e18f392609d5d.png)
 
 结果正如我们所料，就算你在闭包内部把name数组清空了，排序后的新数组返回的内容还是不变，这个name数组在闭包被拷贝了一份，你所有更改都不会影响到它（甚至外部的name被release也是）。
 
@@ -90,7 +90,7 @@ func factorial(n:Int64) -> Int64{
 
 看起来很完美对吧？（当然，为了简化，没有对参数进行任何验证，而且实际也不应该用Int64来存放数字），但是，有没有想过如果我传过来的参数非常大，比如100这样（结果非常大，实际上这时候的结果已经超过Int的最大值了，有人可能这时候就用String之类来存放结果，但是这里讨论的重点不是这个）
 
-![普通递归执行的示意图](http://7xsf4p.com1.z0.glb.clouddn.com/image/b/f8/1d2434005481a33dde2ed357b09de.png)
+![普通递归执行的示意图](http://dreampiggy-image.test.upcdn.net/image/b/f8/1d2434005481a33dde2ed357b09de.png)
 
 当执行factorial(100)的时候，会发生什么呢？你会在栈中存放100个factorial()，包括函数的地址，函数里面定义的参数，变量……如果再大一点，你马上就见识到[StackOverFlow][7]的美景。
 
@@ -116,7 +116,7 @@ func factorialByTail(n:Int64) -> Int64{
 
 (为了所谓的用户体验，所以用一个factorialByTail()来调用真正的递归……一般也是这样的，在这里进行一些数值判断或者更好的优化）
 
-![尾递归改良版的示意图](http://7xsf4p.com1.z0.glb.clouddn.com/image/0/70/4985a8f68dd733af308d0da0c4905.png)
+![尾递归改良版的示意图](http://dreampiggy-image.test.upcdn.net/image/0/70/4985a8f68dd733af308d0da0c4905.png)
 
 和上一个版本的递归比，确实就是多了一个参数来存放上一次递归的结果，但是能非常有效的解决栈溢出的问题，在实际问题中也是非常实用的（甚至说必不可少的），大概到这里就可以了
 

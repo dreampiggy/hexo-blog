@@ -60,7 +60,7 @@ func didReceiveDicResults(results: NSDictionary, tag: String) {
 
 看到了吗，每个VC开头都得这样写一发，如果我们有20多个功能呢？会变成什么样子？
 
-![](http://7xsf4p.com1.z0.glb.clouddn.com/image/9/39/e8ffcb7a5101d2e7acd62c6d72e09.png)
+![](http://dreampiggy-image.test.upcdn.net/image/9/39/e8ffcb7a5101d2e7acd62c6d72e09.png)
 
 所以，这样下去是绝对不行的，必须对整个乱七八糟的初始化，发送请求，请求接受进行封装，这里就会用到Swift最有用的协议，代理，以及闭包了。
 

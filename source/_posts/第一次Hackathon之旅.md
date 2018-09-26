@@ -29,7 +29,7 @@ date: 2016-03-30 01:57:44
 
 > 最终成品
 
-![](http://7xsf4p.com1.z0.glb.clouddn.com/image/e/7a/2ede22b51443bf6ff2fb0629dbc16.png)
+![](http://dreampiggy-image.test.upcdn.net/image/e/7a/2ede22b51443bf6ff2fb0629dbc16.png)
 
 # 编码
 
@@ -61,7 +61,7 @@ date: 2016-03-30 01:57:44
 
 > 合照
 
-![](http://7xsf4p.com1.z0.glb.clouddn.com/image/6/9f/051d44e76dc8adad53771328a99d2.jpeg)
+![](http://dreampiggy-image.test.upcdn.net/image/6/9f/051d44e76dc8adad53771328a99d2.jpeg)
 
  [1]: http://hacks.hustunique.com
  [2]: https://github.com/lizhuoli1126/Crystal-Barrage

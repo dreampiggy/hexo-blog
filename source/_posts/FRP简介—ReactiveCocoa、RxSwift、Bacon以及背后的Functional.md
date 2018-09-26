@@ -92,7 +92,7 @@ RAC(self.passwordTextField, backgroundColor) =
 
 ## RxSwift
 
-![](http://7xsf4p.com1.z0.glb.clouddn.com/image/marble_diagrams_intro--no_text.png)
+![](https://pic3.zhimg.com/v2-4b572f2ac5bc28905f043c7999c83c2a_r.jpg)
 
 [ReactiveX](http://reactivex.io/)，也就是Rx，是一个大的语言无关的FRP架构设计，只要你了解了一个语言下的用法，那么就可以达到`learn once, write everywhere`（跑……）
 
