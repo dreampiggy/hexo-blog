@@ -4,6 +4,7 @@ date: 2018-11-26 17:54:17
 categories: iOS
 tags:
   - iOS
+  - CocoaPods
 ---
 
 > 这篇文章介绍了关于CocoaPods的资源管理行为，对于Pod库作者是必须了解的知识。同时介绍了CocoaPods使用Asset Catalog的注意事项。如果已经了解某方面知识，可以大致略过直接看结论。
