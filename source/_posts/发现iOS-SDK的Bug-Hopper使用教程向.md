@@ -109,6 +109,8 @@ dsc_extractor ./dyld_shared_cache_arm64e ./output
 
 现在我们已经有了一个UIKitCore的Mach-O文件了，我们打开Hopper来载入它。我们可以使用Command+Shift+O来选择一个Mach-O文件，也可以将文件拖动到Hopper界面上来打开。
 
+![](http://dreampiggy-image.test.upcdn.net/image/2019/06/13/15604335461822.jpg)
+
 载入Mach-O文件后，Hopper会弹出框来选择具体分析的内容，大部分情况直接确认即可。如果是分析其他类型的文件，可能有特例如下：
 
 + 分析一个.a或者.dylib，并且该二进制由多个.a或者.dylib合成，这时候会提示你选择具体的某个编译产物
@@ -134,7 +136,11 @@ dsc_extractor ./dyld_shared_cache_arm64e ./output
 
 ## Class-dump与私有头文件
 
-[Class-dump](https://github.com/nygard/class-dump)是一个能够解析Mach-O文件，对应的Objective-C符号，以生成一个完整的头文件的工具。得益于Objective-C运行时和符号的特点，可以方便的还原回基本接近原始的类声明代码。具体使用也很简单，参见项目的Readme。
+[Class-dump](https://github.com/nygard/class-dump)是一个能够解析Mach-O文件，对应的Objective-C符号，以生成一个完整的头文件的工具。得益于Objective-C运行时和符号的特点，可以方便的还原回基本接近原始的类声明代码。具体使用也很简单，参见项目的Readme，编译得到二进制，放到PATH中，然后执行：
+
+```
+class-dump UIKitCore.framework -r -o output -H
+```
 
 对于重头戏，关于iOS SDK的所有头文件，早有专人建立了一个在线网站去分析，点击跳转：[iOS Runtime Headers](http://developer.limneos.net/)
 
