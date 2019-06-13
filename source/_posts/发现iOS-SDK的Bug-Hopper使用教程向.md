@@ -15,7 +15,14 @@ Hopper，全称Hopper Disassembler，是一个macOS和Linux平台上的反汇编
 
 # Hopper安装
 
-Hopper本身目前是收费的软件，提供了免费的使用（30分钟）
+Hopper本身目前是收费的软件，提供了免费的使用（30分钟）。官方下载地址为：[https://www.hopperapp.com](https://www.hopperapp.com/)。Mac版本后解压，拖到Application下即可使用。
+
+对于个人使用，价格不菲，有两种方案，个人比较推荐第一种
+
++ Per User：收费为¥700，允许同一时间唯一激活，不绑定机器硬件
++ Per Computer，收费¥900，和一台电脑的机器硬件绑定
+
+对于只是尝鲜或者轻度使用，其实使用免费版即可。网上现在也有针对旧版本的Cracked版本，不过存在一些问题和崩溃。如果是在需要，可尝试[链接](https://xclient.info/s/hopper-disassembler.html)
 
 # Hopper使用
 
@@ -251,7 +258,7 @@ NSLog(@"%@", [NSStringFromCGRect(*(&var_30 + 0x10), *(&var_30 + 0x18)) retain]);
 
 Swift作为Apple一致力推的下一代官方编程语言，随着iOS 13的发布，现在已经可以作为第一优先的SDK支持语言了，iOS 13上出现了4个Swift Only的库，因此对于Swift相关的反编译需求，也会慢慢出现。然而，不同于动态性强的Objective-C代码，Swift天生的静态强类型语言特性，造成了相当高的反编译难度（堪比C++开O2优化），在这里基本不细讲，只是大概说一下目前的状况。
 
-Hopper从v5开始支持了对Swift符号的符号化，我们不再需要使用swift来反解决mangled的符号名。
+Hopper从v4开始支持了对Swift符号的符号化，我们不再需要使用swift来反解决mangled的符号名。
 
 由于Swift支持完整的命名空间，查询符号需要带上完整的符号
 
