@@ -226,7 +226,7 @@ int ___29-[ViewController viewDidLoad]_block_invoke(int arg0, int arg1) {
 }
 ```
 
-`arg0`对应的永远是`block_impl_0`对象，而后续的Block本身参数会依次作为第2，第3参数。
+对应的`arg0`就是第一个参数，而最后参数对应的是`block_impl_0`实现结构体，可以忽略。
 
 
 
