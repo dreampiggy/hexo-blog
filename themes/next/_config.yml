@@ -133,6 +133,7 @@ font:
   #LinkLabel: Link
 social:
   GitHub: https://github.com/dreampiggy
+  Twitter: https://twitter.com/DreamingPiggy
   Weibo: http://weibo.com/dreampiggy
   Zhihu: https://www.zhihu.com/people/dreampiggy
 
@@ -146,6 +147,7 @@ social_icons:
   # Icon Mappings.
   # KeyMapsToSocalItemKey: NameOfTheIconFromFontAwesome
   GitHub: github
+  Twitter: twitter
   Weibo: weibo
   Zhihu: comments-o
 
