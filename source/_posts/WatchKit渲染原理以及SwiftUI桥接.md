@@ -102,7 +102,7 @@ WKInterfaceObject的**所有**公开API相关属性设置，比如width height�
 这里的提到服务端，在watchOS 1时代其实就是Apple Watch上单独跑的进程，而在watchOS 2上，它和Extension都是在Apple Watch上，也实际上运行在同一个进程中。
 
 对于每个watchOS App，它实际可以当作一个UIKit App。它的main函数入口是一个叫做WKExtensionMain的方法，里面做了一些Extension的初始化以后，就直接调用了
-有UIApplicationMain。watchOS App有AppDelegate（类名为SPApplicationDelegate），会有一个全屏的root UIWindow当作key window。
+有UIApplicationMain。watchOS App有AppDelegate（类名为[SPApplicationDelegate](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPApplicationDelegate.h)），会有一个全屏的root UIWindow当作key window。
 
 ![watchkit1](http://dreampiggy-image.test.upcdn.net/2019/12/10/watchkit1.jpg)
 
@@ -110,16 +110,16 @@ WKInterfaceObject的**所有**公开API相关属性设置，比如width height�
 
 在服务端启动后，它会加载Storyboard中的UI。对每一个客户端的Interface Controller，实际上服务端对应会创建一个View Controller，对应UIViewController的生命周期，会转发到客户端，触发对应的Interface Controller的willActivate/didAppear方法。
 
-因此，watchOS创建了一个SPInterfaceViewController子类来统一做这个事情，它继承自UIViewController，使用客户端传来的Interface Controller ID来绑定起来。
+因此，watchOS创建了一个[SPInterfaceViewController](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPInterfaceViewController.h)子类来统一做这个事情，它继承自[SPViewController](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPViewController.h)，父类又继承自UIViewController，使用客户端传来的Interface Controller ID来绑定起来。
 
 对于UI来说，每一种WKInterfaceObject，其实都会有一个原生的继承自UIView的类去做真正的渲染，比如：
 
-+ WKInterfaceButton: `SPInterfaceButton`，继承自`UIControl`
-+ WKInterfaceImage: `SPInterfaceImageView`，继承自`UIImageView`
-+ WKInterfaceGroup: `SPInterfaceGroupView`，继承自`UIImageView`
-+ WKInterfaceMap: `SPInterfaceMapView`，继承自`MKMapView`
-+ WKInterfaceSwitch: `SPInterfaceSwitch`，继承自`UIControl`
-+ WKInterfaceTable: `SPInterfaceListView`，继承自`UIView`
++ WKInterfaceButton: [SPInterfaceButton](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPInterfaceButton.h)，继承自`UIControl`
++ WKInterfaceImage: [SPInterfaceImageView](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPInterfaceImageView.h)，继承自`UIImageView`
++ WKInterfaceGroup: [SPInterfaceGroupView](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPInterfaceGroupView.h)，继承自`UIImageView`
++ WKInterfaceMap: [SPInterfaceMapView](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPInterfaceMapView.h)，继承自`MKMapView`
++ WKInterfaceSwitch: [SPInterfaceSwitch](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPInterfaceSwitch.h)，继承自`UIControl`
++ WKInterfaceTable: [SPInterfaceListView](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPInterfaceListView.h)，继承自`UIView`
 
 SPInterfaceViewController的主要功能，就是根据Storyboard提供的信息，构造出对应这些UIView的树结构，并且初始化对应的值渲染到UI上（比如说，Image有初始化的Name，Label有初始的Text）。实际上，这些具体的初始化值，都存储在Storyboard中，比如说，这里是一个简单的包含Table，每个TableRow是一个居中的Label，它对应的结构化数据如下：
 
@@ -278,11 +278,11 @@ watchOS除了本身的App功能外，还有一些其他特性，比如这里提�
 
 SwiftUI，允许桥接目前已有的WatchKit的Interface Object，就如在iOS上允许桥接UIKit一样。但是它能做的事情和概念其实完全不一样。
 
-在iOS上，你能通过代码/Storyboard来构建你自己的UIView子类，并且你能构造自己的ViewController管理生命周期事件。这些都能通过SwiftUI的UIViewRepresentable来桥接而来。与此同时，你还可以在你的UIKit代码中，来引入SwiftUI的View。你可以使用UIHostingController当作Child VC，甚至是对应的UIView（`UIHostingController.view`是一个私有类`_UIHostingView`，继承自UIView），是一种双向的桥接。
+在iOS上，你能通过代码/Storyboard来构建你自己的UIView子类，并且你能构造自己的ViewController管理生命周期事件。这些都能通过SwiftUI的[UIViewRepresentable](https://developer.apple.com/documentation/swiftui/uiviewrepresentable)来桥接而来。与此同时，你还可以在你的UIKit代码中，来引入SwiftUI的View。你可以使用UIHostingController当作Child VC，甚至是对应的UIView（`UIHostingController.view`是一个私有类`_UIHostingView`，继承自UIView），是一种双向的桥接。
 
 但是，正如之前提到，WatchKit设计是严重Storyboard Based，你不允许继承Interface Object。你不能使用SwiftUI来引入Storyboard自己构建好的Interface Object/Controller层级。不过相反的是，你可以使用WKHostingController，在Storyboard中去present或者push一个新的SwiftUI页面，实际是一种单向的桥接。
 
-SwiftUI提供的WKInterfaceObjectRepresentable，实际上它只允许你去绑定一些已有的系统UI到SwiftUI中（因为SwiftUI目前还不支持这些控件，比如InlineMovie，MapKit，不排除以后有原生实现）。这些对应的WatchKit Interface Object，在watchOS 6上面都加入了对应的init初始化方法，允许你代码中动态创建，这里是全部的列表：
+SwiftUI提供的[WKInterfaceObjectRepresentable](https://developer.apple.com/documentation/swiftui/wkinterfaceobjectrepresentable)，实际上它只允许你去绑定一些已有的系统UI到SwiftUI中（因为SwiftUI目前还不支持这些控件，比如InlineMovie，MapKit，不排除以后有原生实现）。这些对应的WatchKit Interface Object，在watchOS 6上面都加入了对应的init初始化方法，允许你代码中动态创建，这里是全部的列表：
 
 + WKInterfaceActivityRing
 + WKInterfaceHMCamera
@@ -328,7 +328,7 @@ SwiftUI提供的WKInterfaceObjectRepresentable，实际上它只允许你去绑�
 
 通过从Native watchOS App的布局分析上来看，SwiftUI参考iOS上的方案，依旧是用了一个单独的UIHostingView来插入到Native App的视图层级中，也有对应的UIHostingController。
 
-但是不同于iOS的是，SwiftUI会对每一个Push/Present出来的新View（与是否用了上面提到的WKInterfaceObjectRepresentable无关，这样设计的原因见下），额外套了一个叫做SPHostingViewController的类，它继承自上文提到的SPViewController。
+但是不同于iOS的是，SwiftUI会对每一个Push/Present出来的新View（与是否用了上面提到的WKInterfaceObjectRepresentable无关，这样设计的原因见下），额外套了一个叫做[SPHostingViewController](https://github.com/LeoNatan/Apple-Runtime-Headers/blob/master/watchOS/Frameworks/WatchKit.framework/SPHostingViewController.h)的类，它继承自上文提到的SPViewController。
 
 每个UIHostingController套在了SPHostingViewController的Child VC中，对应View通过约束定成一样的frame，可以看作是一个容器的关系。
 
@@ -378,3 +378,12 @@ SPHostingViewController这个类兼容了这种极端Case，它转发所有收�
 ![watchkit-twitte](http://dreampiggy-image.test.upcdn.net/2019/12/10/watchkit-twitter.jpg)
 
 SwiftUI为watchOS App提供了一个新的出路，它可以说是真正的能够发挥开发者能力来实现精致的App，而不再受限于系统提供的基本控件。而WatchKit，也已经完成了它的使命。相信之后的SwiftUI Native App将会为watchOS创造一片新的生态，Apple Watch也能真正摆脱“iPhone外设”这一个尴尬的局面。
+
+## 参考资料
+
++ [App Programming Guide for watchOS](https://developer.apple.com/library/archive/documentation/General/Conceptual/WatchKitProgrammingGuide/index.html)
++ [WatchKit Catalog Example](https://developer.apple.com/library/archive/samplecode/WKInterfaceCatalog/Introduction/Intro.html)
++ [NSHipster - WatchKit](https://nshipster.com/watchkit/)
++ [WWDC - SwiftUI on watchOS](https://developer.apple.com/videos/play/wwdc2019/219/)
++ [SwiftUI Tutorials - Creating a watchOS App](https://developer.apple.com/tutorials/swiftui/creating-a-watchos-app)
++ [iOS Runtime Headers](http://developer.limneos.net)
