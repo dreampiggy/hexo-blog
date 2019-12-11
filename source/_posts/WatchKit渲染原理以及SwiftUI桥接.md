@@ -158,7 +158,7 @@ SPInterfaceViewController的主要功能，就是根据Storyboard提供的信息
 
 值得注意的是，watchOS由于本身的UI，这些SPInterfaceViewController的rootView，一定是一个容器的View。比如说一般的多种控件平铺的Storyboard会自带`SPInterfaceGroupView`，一个可滚动的Storyboard会自带一个`SPCollectionView`，等等。这里是简单的伪代码：
 
-```objective-c
+```objectivec
 @implementation SPInterfaceViewController
 - (void)loadView {
   Class rootViewClass;
@@ -172,7 +172,7 @@ SPInterfaceViewController的主要功能，就是根据Storyboard提供的信息
 
 UI创建好以后，实际上我们的Extension代码会触发很多Interface object的刷新，比如说更新Label的文案，Image的图片等等，这些会从客户端触发消息，然后在服务端统一由AppDelegate接收到，来根据viewControllerID找到对应先前创建的SPInterfaceViewController。
 
-```objective-c
+```objectivec
 @interface SPApplicationDelegate : NSObject <SPExtensionConnectionDelegate, UIApplicationDelegate>
 @end
 
@@ -188,7 +188,7 @@ UI创建好以后，实际上我们的Extension代码会触发很多Interface ob
 
 因此，拿到UIViewController以后，WatchKit会根据前面传来的interfaceProperty来定位，找到一个需要更新的View。然后向对应的UIView对象，发送对应的property和value，以更新UI。
 
-```objective-c
+```objectivec
 @interface SPInterfaceImageView : UIImageView
 @end
 @implementation SPInterfaceImageView
@@ -302,7 +302,7 @@ SwiftUI提供的[WKInterfaceObjectRepresentable](https://developer.apple.com/doc
 
 它的初始化UI状态，通过一个单独的属性拿到（由每个子类实现，比如MapView，默认的经纬度是0,0）。整体伪代码如下：
 
-```objective-c
+```objectivec
 @implementation WKInterfaceMap
 - (instancetype)init {
     NSString *UUID = [NSUUID UUID].UUIDString;
