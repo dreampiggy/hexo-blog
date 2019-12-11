@@ -78,7 +78,7 @@ WKInterfaceObject的**所有**公开API相关属性设置，比如width height�
 
 简单来说，等价于如下伪代码：
 
-```
+```objectivec
 @implementation WKInterfaceObject
 - (void)setWidth:(CGFloat)width {
   [self _sendValueChanged:@(width) forProperty:@"width"];
