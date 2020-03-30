@@ -102,7 +102,7 @@ let boldSymbolImage = regularSymbolImage.applyingSymbolConfiguration(symbolConfi
 imageView.image = boldSymbolImage
 ```
 
-我们还可以配合AttributedString使用
+另外，我们还可以配合AttributedString使用，只要使用TextAttachment传入对应的Symbol Image即可。
 
 #### 优缺点
 
@@ -363,7 +363,7 @@ SVG-Native基于目前的SVG/1.1版本，是SVG/1.1的真子集（即一个SVG-N
 
 可以看出，这些剥离的功能都是和浏览器场景完全绑定的，不适用于通用的App内渲染矢量图的用途。SVG-Native更适合桌面/移动的App，渲染器实现也会精简很多，容易单元测试，并且可供操作系统内嵌集成。
 
-##### 使用
+#### 使用
 
 Adobe提供了一个目前Draft规范的渲染实现[SVG Native Viewer](https://github.com/adobe/svg-native-viewer)，目前提供了多种渲染引擎的桥接，包括我们熟悉的CoreGraphics和Skia。
 
