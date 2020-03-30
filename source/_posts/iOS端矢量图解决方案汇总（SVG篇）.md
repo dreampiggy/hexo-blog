@@ -10,6 +10,7 @@ tags:
 ---
 
 # iOS端矢量图解决方案汇总（SVG篇）
+## 简介
 
 [矢量图](https://en.wikipedia.org/wiki/Vector_graphics)，指的是通过一系列数学描述，能够进行无损级别的变化和缩放的一种图像。相比于标量图（如JPEG等标量图压缩格式），能够在绘制时进行任意大小伸缩而不产生模糊，甚至能够实现动态着色，动画等等一系列交互。
 
@@ -22,13 +23,13 @@ tags:
 
 SVG作为目前在Web上最流行的矢量格式，在iOS端的支持可以说是一言难尽。在这里，我从各个方向上总结了截至目前已有的实现（公开的方案，企业内部实现无从得知），方便对比选择最适合自己场景的选择。
 
-### Symbol Image
+## Symbol Image
 
 [Symbol Image](https://developer.apple.com/videos/play/wwdc2019/206/)，是Apple在WWDC 2019和iOS 13上提供的矢量图解析方案。
 
 之所以名称叫做Symbol Image，源自于这个技术方案的实现细节，它最早诞生于SVG字体规范：[OpenType-SVG](https://helpx.adobe.com/fonts/using/ot-svg-color-fonts.html)。这个规范是Adobe提出的，并且得到了包括Microsoft在内的多家公司支持。Apple自己的CoreText字体框架，其实早早就在[iOS 11时代](https://developer.apple.com/documentation/coretext/1524658-anonymous/kctfonttablesvg?language=objc)内部支持了SVG类型的font table。
 
-#### 制作Symbol Image
+### 制作Symbol Image
 
 Symbol Image的整体API设计，其实不像是图像，更像是一种字体（和Icon Font类似）。
 
@@ -61,7 +62,7 @@ Symbol Image的整体API设计，其实不像是图像，更像是一种字体�
 ```
 
 
-#### 导入Symbol Image
+### 导入Symbol Image
 
 导入Symbol Image的方式非常简单，你只需要将制作好的Symbol Image，向Xcode的Asset Catalog窗口拖动，就可以集成。Xcode可以会展示对应的预览效果。
 
@@ -72,7 +73,7 @@ Symbol Image的整体API设计，其实不像是图像，更像是一种字体�
 
 ![截屏2020-03-30下午6.09.18](http://dreampiggy-image.test.upcdn.net/2020/03/30/%E6%88%AA%E5%B1%8F2020-03-30%E4%B8%8B%E5%8D%886.09.18.png)
 
-#### 使用Symbol Image
+### 使用Symbol Image
 
 对于iOS 13系统提供的自带Symbol Image，UIKit提供了[init(systemName:)方法](https://developer.apple.com/documentation/uikit/uiimage/3294233-init)来获取，对于App自行提供的Symbol Image，我们使用[init(named:)](https://developer.apple.com/documentation/uikit/uiimage/1624146-init)方法。
 
@@ -104,7 +105,7 @@ imageView.image = boldSymbolImage
 
 另外，我们还可以配合AttributedString使用，只要使用TextAttachment传入对应的Symbol Image即可。
 
-#### 优缺点
+### 优缺点
 
 优点：
 
@@ -118,7 +119,7 @@ imageView.image = boldSymbolImage
 + 通过字体属性控制大小，取决于UI场景，做到Pixel级别的拉伸会是一个问题
 + 需要单独制作Symbol Image，跨平台，Web使用痛点
 
-### CoreSVG
+## CoreSVG
 
 CoreSVG是iOS 13支持Symbol Image的背后的底层SVG渲染引擎，使用C++编写。
 
@@ -126,7 +127,7 @@ CoreSVG是iOS 13支持Symbol Image的背后的底层SVG渲染引擎，使用C++�
 
 注意！以下方法均为使用了CoreSVG的Private API，可能随着操作系统变动会有改变，并且有审核风险，如果需要线上使用，请自行进行代码混淆等方案。
 
-#### 通过Asset Catalog使用SVG
+### 通过Asset Catalog使用SVG
 
 目前Xcode不支持直接拖动SVG文件来集成到Asset Catalog，因为拖动SVG默认会当作Symbol Image处理。
 
@@ -149,7 +150,7 @@ imageView.frame = CGRectMake(0, 0, 1000, 1000);
 ![EUU_DLPU8AM5KHD](http://dreampiggy-image.test.upcdn.net/2020/03/30/EUU_DLPU8AM5KHD.jpeg)
 
 
-#### 加载任意SVG数据（网络）
+### 加载任意SVG数据（网络）
 
 除了能够通过Asset Catalog添加SVG图像，通过CoreSVG，我们可以在运行时去解析网络数据下载得到的SVG数据，为此能提供更为广阔的应用场景。
 
@@ -161,7 +162,7 @@ UIImage *svgImage = [UIImage _imageWithCGSVGDocument:document];
 imageView.image = svgImage;
 ```
 
-#### 渲染SVG矢量图到标量图
+### 渲染SVG矢量图到标量图
 
 一些UIKit的视图，或者一些图像处理，对矢量图支持并没有考虑，或者是我们在做性能优化时，需要将矢量图光栅化得到对应的标量图。CoreSVG提供了和CoreGraphics的PDF类似的接口，允许你去绘制得到对应的标量图。
 
@@ -197,7 +198,9 @@ image = GraphicsGetImageFromCurrentImageContext();
 UIGraphicsEndImageContext();
 ```
 
-#### SVG导出
+### SVG导出
+
+目前，CoreSVG没有提供类似于PDF的修改元素的接口，我们只能直接对SVGDocument进行导出。或许随着未来框架的开放，会有类似于目前CoreGraphics对PDF进行编辑的高级接口。
 
 ```objectivec
 // 获取SVG Document
@@ -211,7 +214,7 @@ CGSVGDocumentWriteToData(document, (__bridge CFMutableDataRef)data, NULL);
 CGSVGDocumentWriteToURL(document, (__bridge CFURLRef)url, NULL);
 ```
 
-#### 优缺点 
+### 优缺点 
 
 优点
 
@@ -224,9 +227,9 @@ CGSVGDocumentWriteToURL(document, (__bridge CFURLRef)url, NULL);
 + 可能存在一些SVG元素兼容问题，需要不断摸索
 + SwiftUI不支持，需要使用UIViewRepresentable
 
-### 三方SVG库
+## 三方SVG库
 
-#### [SVGKit](https://github.com/SVGKit/SVGKit)
+### [SVGKit](https://github.com/SVGKit/SVGKit)
 
 SVGKit是最早的iOS上开源SVG渲染方案，已经有8年之久。SVGKit内部支持两种渲染模式，一种是通过CPU渲染（CoreGraphics重绘制），一种是通过GPU渲染（CALayer树组合）。有着不同的兼容性和性能。
 
@@ -253,7 +256,7 @@ imageView.image = svgImage;
 + 部分SVG特性虽然声明支持，但存在问题，如Gradient等，缺少单测
 + 不支持SVG动画
 
-#### [Macaw](https://github.com/exyte/Macaw)
+### [Macaw](https://github.com/exyte/Macaw)
 
 Macaw是一个矢量绘制框架，提供了非常简单的DSL语法来描述矢量路径绘制的场景。它本身不是和SVG强绑定的，但是对SVG格式提供了兼容和支持
 
@@ -276,7 +279,7 @@ imageView.node = node
 + 部分SVG特性特性声明不支持
 + SVG性能渲染差（相对于SVGKit），依赖大量的的CPU绘制操作（非CALayer组合），可能需要结合异步绘制框架
 
-#### [SwiftSVG](https://github.com/mchoe/SwiftSVG)
+### [SwiftSVG](https://github.com/mchoe/SwiftSVG)
 
 SwiftSVG是一个专门针对SVG Path等常见特性的矢量图解析框架，他不侧重于完整的SVG/1.1规范支持，而是保证了基本的绘制实现的正确性，并且支持导出SVG的Path到UIBezierPath
 
@@ -303,7 +306,7 @@ self.view.addSubview(hammock)
 + 基本上只针对Path，Circle等元素有良好的支持，其他的Gradient，Text等均不支持
 + 不支持SVG动画
 
-### VectorDrawable
+## VectorDrawable
 
 [VectorDrawable](https://developer.android.com/guide/topics/graphics/vector-drawable-resources)是Android平台上官方提供的一套矢量图解决方案，他是以一个类似SVG的XML表达形式，来描述矢量图的绘制方式。
 
@@ -314,7 +317,7 @@ self.view.addSubview(hammock)
 
 在iOS上平台上，Uber内部开源了一套自己在用的VectorDrawable实现：[Cyborg](https://github.com/uber/cyborg)，通过利用CoreGraphics和CoreAnimation来渲染VectorDrawable文件。
 
-#### 使用VectorDrawable渲染
+### 使用VectorDrawable渲染
 
 VectorDrawable提供了一个专门用于矢量图的View，并且能够制定对应的Theme（Theme是用来支持不同资源的Dark Mode切换的）。
 
@@ -329,7 +332,7 @@ vectorView.drawable = VectorDrawable.create(from: data)
 
 如果这个不满足，你也可以通过CALayer来做渲染，做更为细致的调节。并且VectorDrawable也提供了一些定制项（如设置tintColor）
 
-#### 优缺点
+### 优缺点
 
 优点
 
@@ -342,7 +345,7 @@ vectorView.drawable = VectorDrawable.create(from: data)
 + 部分SVG实现VectorDrawable不支持，需要设计资源修改
 + Uber内部开源，可能存在未来持续社区建设和维护成本，需要评估
 
-### SVG-Native
+## SVG-Native
 
 [SVG-Native](https://svgwg.org/specs/svg-native/)是由Adobe主导提出的一个W3C规范，目前处于Draft Stage，不过由于Apple，Google的赞同，大概率会在2020年内通过，并且正式规范定稿。
 
@@ -363,7 +366,7 @@ SVG-Native基于目前的SVG/1.1版本，是SVG/1.1的真子集（即一个SVG-N
 
 可以看出，这些剥离的功能都是和浏览器场景完全绑定的，不适用于通用的App内渲染矢量图的用途。SVG-Native更适合桌面/移动的App，渲染器实现也会精简很多，容易单元测试，并且可供操作系统内嵌集成。
 
-#### 使用
+### 使用
 
 Adobe提供了一个目前Draft规范的渲染实现[SVG Native Viewer](https://github.com/adobe/svg-native-viewer)，目前提供了多种渲染引擎的桥接，包括我们熟悉的CoreGraphics和Skia。
 
@@ -389,7 +392,7 @@ SVG-Native解码器，能够以标量图的方式，渲染SVG到一个指定大�
 }
 ```
 
-#### 优缺点
+### 优缺点
 
 优点
 
@@ -404,11 +407,17 @@ SVG-Native解码器，能够以标量图的方式，渲染SVG到一个指定大�
 + SVG-Native目前只有Adobe的解析器实现，部分特性在CoreGraphics上工作并不良好
 + 目前没有看到动画的支持
 
+## 总结
 
-### 总结
+总结一下关于SVG的相关解决方案，可以看出，没有一种Case能够涵盖所有场景，当然，这和Apple本身对矢量图支持的建设有一定关系，大部分建设依赖于开源社区。因此，通常情况下需要根据自己具体的实际需要来选择，比如：
 
++ 只考虑Path，Circle等矢量路径：使用SwiftSVG、Macaw即可
++ 考虑和Android复用：使用VectorDrawable
++ 不考虑iOS 13以下兼容：优先用Symbol Image和CoreSVG
++ 考虑SVG动画：Macaw
++ 面向未来：SVG-Native
 
-### 参考资料
+## 参考资料
 
 + [解读 WWDC19 - SF Symbols 内置图标库](https://swiftcafe.io/post/sf-symbol)
 + [SF Symbols: The benefits and how to use them guide](https://www.avanderlee.com/swift/sf-symbols-guide/)
