@@ -35,7 +35,7 @@ Symbol Image的整体API设计，其实不像是图像，更像是一种字体�
 
 对于同一个Symbol Image，它可以看作是一个SVG Path的集合。前面提到，Symbol Image基于OpenType-SVG字体，对于字体来说，我们都知道字重的概念，用来决定渲染时候的线条粗细程度。
 
-因此Symbol Image也有8个字重：Thin，Light，Regular，Medium，Semibold，Bold，Heavy，Black。与此同时，Symbol Image对每一个字重，支持了3种大小，分别是Small，Medium和Large。这也就是说，一个Symbol Image最多可以有24种大小字重的样式选择。
+因此Symbol Image也有9个字重：Ultralight，Thin，Light，Regular，Medium，Semibold，Bold，Heavy，Black。与此同时，Symbol Image对每一个字重，支持了3种大小，分别是Small，Medium和Large。这也就是说，一个Symbol Image最多可以有27种大小字重的样式选择。
 
 一般来说，从头构建一个Symbol Image会非常复杂，Apple推荐的方式，是通过使用[SF Symbols App](https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/)，来导出一个SVG模版，再通过Sketch来进行图层编辑。
 
