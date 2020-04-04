@@ -75,7 +75,7 @@ Symbol Image的整体API设计，其实不像是图像，更像是一种字体�
 
 ### 使用Symbol Image
 
-对于iOS 13系统提供的自带Symbol Image，UIKit提供了[init(systemName:)方法](https://developer.apple.com/documentation/uikit/uiimage/3294233-init)来获取，对于App自行提供的Symbol Image，我们使用[init(named:)](https://developer.apple.com/documentation/uikit/uiimage/1624146-init)方法。
+对于iOS 13系统提供的自带Symbol Image，UIKit提供了[init(systemName:)](https://developer.apple.com/documentation/uikit/uiimage/3294233-init)方法来获取，对于App自行提供的Symbol Image，我们使用[init(named:)](https://developer.apple.com/documentation/uikit/uiimage/1624146-init)方法。
 
 注意，你可以同时包含一个Symbol Image和普通的Asset Image，共享一个Name。这样设计的好处，在WWDC上有介绍，是为了兼容iOS 12等低系统版本，在iOS 13上，Symbol Image优先级永远高于普通Asset Image，在iOS 12会自动fallback。
 
@@ -105,6 +105,15 @@ imageView.image = boldSymbolImage
 
 另外，我们还可以配合AttributedString使用，只要使用TextAttachment传入对应的Symbol Image即可。
 
+```swift
+let textView = UITextView()
+// 可以微调Symbol Image与文字的对齐
+let baselineSymbolImage = symbolImage.withBaselineOffset(fromBottom: 1.0)
+let imageAttachment = NSTextAttachment(image: baselineSymbolImage)
+let imageString = NSAttributedString(attachment: imageAttachment)
+textView.attributedText = imageString
+```
+
 ### 优缺点
 
 优点：
@@ -131,7 +140,7 @@ CoreSVG是iOS 13支持Symbol Image的背后的底层SVG渲染引擎，使用C++�
 
 目前Xcode不支持直接拖动SVG文件来集成到Asset Catalog，因为拖动SVG默认会当作Symbol Image处理。
 
-但是我们可以通过一个取巧的方式来实现，Xcode支持PDF矢量图，因此，我们将你的SVG后缀改成PDF，然后拖动，最后再修改回SVG后缀名，并且同步`.imageset/Contents.json`里面的文件名即可，如下：
+但是我们可以通过一个取巧的方式来实现，Xcode支持PDF矢量图（从iOS 11与Xcode 9开始支持，PDF章会讲解）。因此，我们可以将SVG后缀改成PDF，然后拖动到Xcode中，最后再修改回SVG后缀名，并且同步`.imageset/Contents.json`里面的文件名即可，如下：
 
 ![EUR_hKSUwAA1-65](http://dreampiggy-image.test.upcdn.net/2020/03/30/EUR_hKSUwAA1-65.png)
 
@@ -145,7 +154,7 @@ imageView.image = svgImage;
 imageView.frame = CGRectMake(0, 0, 1000, 1000);
 ```
 
-从运行时来看，加入Asset Catalog的SVG矢量图的UIImage，含有对应的CGDocumentRef对象，并且也包含了一个标量图的缩略图，可以供缩略图或者其他系统API来调用。并且在Xcode的Interface Builder上也会有明显的SVG标识（类似PDF）
+从运行时来看，加入Asset Catalog的SVG矢量图的UIImage，含有对应的CGSVGDocumentRef对象，并且也包含了一个标量图的缩略图，可以供缩略图或者其他系统API来调用。并且在Xcode的Interface Builder上也会有明显的SVG标识（类似PDF）
 
 ![EUU_DLPU8AM5KHD](http://dreampiggy-image.test.upcdn.net/2020/03/30/EUU_DLPU8AM5KHD.jpeg)
 
@@ -194,7 +203,7 @@ CGContextConcatCTM(context, scaleTransform);
 // 绘制SVG Document
 CGContextDrawSVGDocument(context, document);
 // 获取标量图
-image = GraphicsGetImageFromCurrentImageContext();
+image = UIGraphicsGetImageFromCurrentImageContext();
 UIGraphicsEndImageContext();
 ```
 
