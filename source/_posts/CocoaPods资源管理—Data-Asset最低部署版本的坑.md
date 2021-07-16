@@ -92,7 +92,7 @@ end
 
 看起来非常正常，但是实际上行为就是有所不同。于是简单开始从源头排查差异。
 
-### 宿主A
+## 宿主A
 
 我们搜索查看Xcode最终编译的命令。负责编译xcassets的命令是actool。我们可以看到，在`com.apple.actool.compilation-results`这里有打印所有的输出，是符合预期的。
 
@@ -116,7 +116,7 @@ CompileAssetCatalog /Users/bytedance/Library/Developer/Xcode/DerivedData/TTAdSpl
 
 ![1625559957323_ceced1da15007185b48893a6eda48754](http://dreampiggy-image.test.upcdn.net/2021/07/16/1625559957323_ceced1da15007185b48893a6eda48754.png)
 
-### 宿主B
+## 宿主B
 
 同样的，我们查看编译命令：
 
@@ -148,7 +148,7 @@ CompileAssetCatalog /Users/bytedance/Library/Developer/Xcode/DerivedData/TTAdSpl
 
 经过再次Demo验证，确定了是这个导致了行为的差异！
 
-### SDK调用代码
+## SDK调用代码
 
 SDK运行时需要获取这些代码，经过查看，这里的代码是假设按照.bundle根路径存在Data Asset的文件名的方式去取的，因此在宿主A中会出现异常：
 
@@ -168,7 +168,7 @@ NSData *triangleData = [NSData dataWithContentsOfFile:trianglePath];
 self.imageView.image = [UIImage imageWithData:triangleData];
 ```
 
-### 进一步排查最低部署版本变化
+## 进一步排查最低部署版本变化
 
 本质原因了解清楚后，进一步排查这个疑问：
 
