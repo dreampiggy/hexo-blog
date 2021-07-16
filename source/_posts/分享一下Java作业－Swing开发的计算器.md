@@ -3,8 +3,6 @@ title: 分享一下Java作业－Swing开发的计算器
 categories: Java
 tags:
   - Java
-permalink: fen-xiang-yi-xia-javazuo-ye-swingkai-fa-de-ji-suan-qi
-id: 4
 updated: '2016-03-30 00:37:07'
 date: 2016-03-29 23:40:53
 ---

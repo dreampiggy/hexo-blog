@@ -4,9 +4,6 @@ categories: iOS
 tags:
   - iOS
   - Swift
-permalink: >-
-  jie-shang-yi-hua-zai-swiftzhong-shi-yong-dai-li-lai-zhong-zhuan-qing-qiu-he-xiang-ying
-id: 14
 updated: '2016-03-30 01:50:54'
 date: 2016-03-30 01:37:07
 ---

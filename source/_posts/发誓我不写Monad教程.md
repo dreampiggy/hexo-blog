@@ -4,8 +4,6 @@ categories: JavaScript
 tags:
   - JavaScript
   - Functional
-permalink: fa-shi-wo-bu-xie-monadjiao-cheng
-id: 25
 updated: '2016-03-30 02:21:28'
 date: 2016-03-30 02:21:06
 ---

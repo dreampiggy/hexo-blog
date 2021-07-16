@@ -3,8 +3,6 @@ title: Retroactive Data Structure
 categories: Code
 tags:
   - 数据结构
-permalink: retroactive-data-structure
-id: 27
 updated: '2016-03-30 02:34:16'
 date: 2016-03-30 02:30:31
 mathjax: true

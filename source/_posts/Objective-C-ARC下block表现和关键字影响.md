@@ -4,8 +4,6 @@ categories: iOS
 tags:
   - iOS
   - Objective-C
-permalink: objective-c-arcxia-blockbiao-xian-he-guan-jian-zi-ying-xiang
-id: 39
 updated: '2016-06-17 01:34:07'
 date: 2016-06-17 00:58:03
 ---

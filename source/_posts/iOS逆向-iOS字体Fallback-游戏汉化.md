@@ -5,8 +5,6 @@ tags:
   - iOS
   - 逆向
   - Game
-permalink: iosni-xiang-ioszi-ti-fallback-you-xi-yi-hua
-id: 37
 updated: '2016-07-14 01:39:32'
 date: 2016-06-05 20:33:54
 ---

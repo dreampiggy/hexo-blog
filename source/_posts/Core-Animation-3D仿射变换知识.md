@@ -4,8 +4,6 @@ categories: iOS
 tags:
   - iOS
   - CoreAnimation
-permalink: core-animation-3dfang-she-bian-huan-zhi-shi
-id: 48
 updated: '2016-11-02 11:21:22'
 date: 2016-11-01 19:04:10
 mathjax: true

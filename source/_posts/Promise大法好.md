@@ -4,8 +4,6 @@ categories: JavaScript
 tags:
   - JavaScript
   - 异步
-permalink: promiseda-fa-hao
-id: 24
 updated: '2016-03-30 02:18:18'
 date: 2016-03-30 02:14:46
 ---

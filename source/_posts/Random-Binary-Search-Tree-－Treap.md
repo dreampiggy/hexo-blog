@@ -4,8 +4,6 @@ categories: Code
 tags:
   - C++
   - 数据结构
-permalink: random-binary-search-tree-treap
-id: 26
 updated: '2016-03-30 02:29:56'
 date: 2016-03-30 02:21:50
 mathjax: true

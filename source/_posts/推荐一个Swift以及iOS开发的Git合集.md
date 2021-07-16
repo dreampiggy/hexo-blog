@@ -3,8 +3,6 @@ title: 推荐一个Swift以及iOS开发的Git合集
 categories: iOS
 tags:
   - iOS
-permalink: tui-jian-yi-ge-swiftyi-ji-ioskai-fa-de-githe-ji
-id: 15
 updated: '2016-03-30 01:43:07'
 date: 2016-03-30 01:42:11
 ---

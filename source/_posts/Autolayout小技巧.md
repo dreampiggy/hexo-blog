@@ -3,8 +3,6 @@ title: Autolayout小技巧
 categories: iOS
 tags:
   - iOS
-permalink: autolayoutxiao-ji-qiao
-id: 16
 updated: '2016-03-30 01:44:01'
 date: 2016-03-30 01:43:27
 ---

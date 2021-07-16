@@ -5,8 +5,6 @@ tags:
   - JavaScript
   - Swift
   - ReactJS
-permalink: react-native-xia-yi-dai-uibian-cheng-si-wei
-id: 28
 updated: '2016-03-30 02:37:28'
 date: 2016-03-30 02:35:42
 ---

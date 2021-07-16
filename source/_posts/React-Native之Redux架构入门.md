@@ -5,8 +5,6 @@ tags:
   - iOS
   - React Native
   - Redux
-permalink: react-nativezhi-reduxjia-gou-ru-men
-id: 47
 updated: '2016-10-26 17:39:01'
 date: 2016-10-26 17:23:28
 ---

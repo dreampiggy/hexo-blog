@@ -4,8 +4,6 @@ categories: Web
 tags:
   - Node.js
   - JavaScript
-permalink: webru-men-hou-duan-jia-gou-you-gan-node-js
-id: 10
 updated: '2016-03-30 00:59:35'
 date: 2016-03-30 00:56:15
 ---

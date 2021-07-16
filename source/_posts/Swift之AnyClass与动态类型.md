@@ -3,8 +3,6 @@ title: Swift之AnyClass与动态类型
 categories: iOS
 tags:
   - Swift
-permalink: swiftzhi-anyclassyu-dong-tai-lei-xing
-id: 29
 updated: '2016-03-31 14:14:53'
 date: 2016-03-30 02:38:56
 ---

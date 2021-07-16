@@ -4,8 +4,6 @@ categories: iOS
 tags:
   - iOS
   - Swift
-permalink: ioskai-fa-zhong-shi-yong-swiftlai-wan-cheng-yi-bu-shi-jian
-id: 17
 updated: '2016-03-30 02:44:10'
 date: 2016-03-30 01:44:12
 ---

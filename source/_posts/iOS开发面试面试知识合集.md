@@ -5,8 +5,6 @@ tags:
   - iOS
   - Objective-C
   - 面试
-permalink: ioskai-fa-mian-shi-mian-shi-zhi-shi-he-ji
-id: 45
 updated: '2016-09-26 21:53:48'
 date: 2016-09-25 19:27:00
 ---

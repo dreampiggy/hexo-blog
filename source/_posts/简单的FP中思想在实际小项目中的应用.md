@@ -5,8 +5,6 @@ tags:
   - JavaScript
   - iOS
   - Functional
-permalink: jian-dan-de-fpzhong-si-xiang-zai-shi-ji-xiao-xiang-mu-zhong-de-ying-yong
-id: 18
 updated: '2016-03-30 01:50:11'
 date: 2016-03-30 01:46:58
 ---

@@ -5,8 +5,6 @@ tags:
   - iOS
   - Xcode
   - Debug
-permalink: xcodezi-dai-de-uidiao-shi-gong-ju
-id: 34
 updated: '2016-05-30 22:43:18'
 date: 2016-05-30 15:03:46
 ---

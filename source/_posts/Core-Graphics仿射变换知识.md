@@ -5,8 +5,6 @@ tags:
   - iOS
   - Objective-C
   - CoreGraphics
-permalink: core-graphicsfang-she-bian-huan
-id: 46
 updated: '2016-11-01 23:36:06'
 date: 2016-09-27 09:49:02
 mathjax: true

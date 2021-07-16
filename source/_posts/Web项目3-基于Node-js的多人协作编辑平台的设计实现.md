@@ -5,9 +5,6 @@ tags:
   - Web
   - Node.js
   - JavaScript
-permalink: >-
-  webxiang-mu-3-ji-yu-node-jsde-duo-ren-xie-zuo-bian-ji-ping-tai-de-she-ji-shi-xian
-id: 12
 updated: '2016-03-30 01:30:31'
 date: 2016-03-30 01:19:21
 ---

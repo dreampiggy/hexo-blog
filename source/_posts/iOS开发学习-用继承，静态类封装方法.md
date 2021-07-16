@@ -3,8 +3,6 @@ title: iOS开发学习-用继承，静态类封装方法
 categories: iOS
 tags:
  - iOS
-permalink: ioskai-fa-xue-xi-yong-ji-cheng-jing-tai-lei-feng-zhuang-fang-fa
-id: 13
 updated: '2016-03-30 01:36:02'
 date: 2016-03-30 01:32:51
 ---

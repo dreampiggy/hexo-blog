@@ -3,8 +3,6 @@ title: 偶然发现的，关于C++指针的一点注意事项
 categories: C++
 tags:
   - C++
-permalink: ou-ran-fa-xian-de-guan-yu-c-zhi-zhen-de-yi-dian-zhu-yi-shi-xiang
-id: 7
 updated: '2016-03-30 00:41:01'
 date: 2016-03-30 00:38:49
 ---

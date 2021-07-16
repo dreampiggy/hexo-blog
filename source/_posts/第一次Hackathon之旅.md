@@ -3,8 +3,6 @@ title: 第一次Hackathon之旅
 categories: Life
 tags:
   - Hackathon
-permalink: di-yi-ci-hackathonzhi-lu
-id: 20
 updated: '2016-03-30 01:59:00'
 date: 2016-03-30 01:57:44
 ---
