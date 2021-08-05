@@ -179,7 +179,7 @@ site_state: true
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
   GitHub: https://github.com/dreampiggy || fab fa-github
-  Twitter: https://twitter.com/DreamingPiggy || fab fa-weibo
+  Twitter: https://twitter.com/DreamingPiggy || fab fa-twitter
   Weibo: http://weibo.com/dreampiggy || fab fa-weibo
   Zhihu: https://www.zhihu.com/people/dreampiggy || fab fa-zhihu
   #GitHub: https://github.com/yourname || fab fa-github
