@@ -284,7 +284,7 @@ loc_100002b7f:
 
 看到我们关心的`DVTMinimumSystemVersion`和`LSMinimumSystemVersion`都在里面。其实也侧面证明了，真正的最低部署版本是macOS 11.0，而不是macOS 12.0（12.0只是苹果为了间接Push Developer去频繁更新macOS的阴谋罢了😂）
 
-那下一步，要做的事情就是用魔改`xcodebuild`并重新codesign。修改的方式多种多样，你暴力使用Hex Editor也是最简单。但是我更好奇的是这个`__TEXT,__info_plist`的machO段和节的相关寿命。
+那下一步，要做的事情就是用魔改`xcodebuild`并重新codesign。修改的方式多种多样，你暴力使用Hex Editor也是最简单。但是我更好奇的是这个`__TEXT,__info_plist`的machO段和节的相关说明。
 
 在网上搜索了一下相关资料，很容易就找到了感兴趣的资料：
 
