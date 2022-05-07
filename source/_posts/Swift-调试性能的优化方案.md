@@ -52,7 +52,7 @@ PS：理论上可以通过业务的工程结构的改造，在本地开发模式
 经过调研，我们发现业界常见做法，无外乎这几种思路：
 
 1.  工程改造：缩减Swift Module/Search Path数量：可行，但是收益较低，且不可能无限制缩减
-2.  通过LLDB一些开关：可行，但是内网测试下依旧达不到理想的调试状态
+2.  通过LLDB一些开关：可行，但是内部测试下依旧达不到理想的调试状态
 
 我们致力于在字节跳动的移动端提供基础能力支持，因此提出了一套解决方案，不依赖业务工程结构的改造，而是从LLDB工具链上入手，提供定向的调试性能优化。
 
@@ -186,7 +186,7 @@ settings set symbols.use-swift-typeref-typesystem false
 
 这里的remoteAST和Swift Mirror的概念，上文介绍过，不同方案会影响Swift的Dynamic Type Resolve的性能。
 
-经过实测，关闭之后，内网项目的复杂场景下，断点陷入耗时从原本的2分20秒，缩减为1分钟。这部分开关，目前已经通过Xcode自定义的[LLDBInit](https://lldb.llvm.org/man/lldb.html#configuration-files)[6]文件，在多个项目中设置。
+经过实测，关闭之后，内部项目的复杂场景下，断点陷入耗时从原本的2分20秒，缩减为1分钟。这部分开关，目前已经通过Xcode自定义的[LLDBInit](https://lldb.llvm.org/man/lldb.html#configuration-files)[6]文件，在多个项目中设置。
 
 注：和Apple同事沟通后，swift-typeref-typesystem是团队20年提出的新方案，目前有一些已知的性能问题，但是对Swift变量和类型展示有更好的兼容性。关闭以后会导致诸如，typealias的变量在p/v时展示会有差异，比如`TimeInterval`（alias为`__C.Double`）等。待Apple后续优化之后，建议恢复开启状态。
 
@@ -207,7 +207,7 @@ Failed to find framework for "AAStub" looking along paths:
 
 swiftmodule是编译器序列化的包含了AST的[LLVM Bitcode](https://llvm.org/docs/BitCodeFormat.html)[7]。除了AST之外，还有很多Metadata，如编译器版本，编译时刻的参数，Search Paths等（通过编译器参数`-serialize-debugging-options`记录）。另外，对Swift代码中出现的import语句，也会记录一条加载模块依赖。而主二进制在编译时会记录所有子模块的递归依赖。
 
-LLDB在进行加载模块依赖时，会根据编译器得到的Search Paths，拼接上当前的Module Name，然后遍历进行dlopen。涉及较高的时间开销：N个Module，M个Search Path，复杂度O(NxM)（内网项目为400x1000数量级）。而在执行前。并未检测当前被加载的路径是否真正是一个动态链接库，最终产生了这个错误的开销。
+LLDB在进行加载模块依赖时，会根据编译器得到的Search Paths，拼接上当前的Module Name，然后遍历进行dlopen。涉及较高的时间开销：N个Module，M个Search Path，复杂度O(NxM)（内部项目为400x1000数量级）。而在执行前。并未检测当前被加载的路径是否真正是一个动态链接库，最终产生了这个错误的开销。
 
 - 修复方案
 
@@ -245,7 +245,7 @@ Reconstruct Clang module dependencies from DWARF when debugging Swift code
 
 切换以后可能部分clang type的类型解析并不会很精确（比如Apple系统库的那种overlay framework，用原生Swift类型覆盖了同名C类型），但是能稍微加速解析速度，这是因为clang pcm和DWARF的解析实现差异。
 
-禁用之后，对内网测试工程部分场景有正向提升约10秒，如果遇到问题建议保持默认的true。
+禁用之后，对内部项目测试工程部分场景有正向提升约10秒，如果遇到问题建议保持默认的true。
 
 ## 优化External Module的查找路径逻辑
 
@@ -257,7 +257,7 @@ LLDB的原始逻辑，会针对每一个可能的路径，分别由它的4种Obj
 
 - 优化方案
 
-我们内网采取的策略比较激进，除了直接利用fstat进行前置的判断（而不是分别交给4个ObjectFile插件总计判断4次）外，还针对Mac机器的路径进行了一些特殊路径匹配规则，这里举个例子：
+我们内部采取的策略比较激进，除了直接利用fstat进行前置的判断（而不是分别交给4个ObjectFile插件总计判断4次）外，还针对Mac机器的路径进行了一些特殊路径匹配规则，这里举个例子：
 
 比如说，Mac电脑的编译产物绝对路径，一定是以`/Users/${whoami}`开头，所以我们可以先尝试获取当前调试器进程的`uname`（非常快且LLDB进程周期内不会变化），如果不匹配，说明编译产物一定不是在当前设备进行上产出的，直接跳过。
 
@@ -265,11 +265,11 @@ LLDB的原始逻辑，会针对每一个可能的路径，分别由它的4种Obj
 
 ![](https://lf3-client-infra.bytetos.com/obj/client-infra-images/lizhuoli/f7dac35688c54f2e9ac1a605b4295a39/2022-05-07/16519143338511.png)
 
-通过这一项优化，在内网项目测试下（1000多个External Module路径，其中800+无效路径），可以减少首次变量显示v耗时约30秒。
+通过这一项优化，在内部项目测试下（1000多个External Module路径，其中800+无效路径），可以减少首次变量显示v耗时约30秒。
 
 ## 增加共享的symbols缓存
 
-我们使用内网项目进行性能Profile时，发现`Module::FindTypes`和`SymbolFile::FindTypes`函数耗时调用占了主要的大头。这个函数的功能是通过DWARF（记录于Mach-O结构中），查找一个符号字符串是否包含在内。耗时主要是在需要进行一次性DWARF的解析，以及每次查找的section遍历。
+我们使用内部项目进行性能Profile时，发现`Module::FindTypes`和`SymbolFile::FindTypes`函数耗时调用占了主要的大头。这个函数的功能是通过DWARF（记录于Mach-O结构中），查找一个符号字符串是否包含在内。耗时主要是在需要进行一次性DWARF的解析，以及每次查找的section遍历。
 
 LLDB本身是存在一个`searched_symbol_files`参数用来缓存，但是问题在于，这份缓存并不是存在于一个全局共享池中，而是在每个具体调用处的临时堆栈上。一旦调用方结束了调用，这份缓存会被直接丢弃。
 
@@ -281,7 +281,7 @@ LLDB本身是存在一个`searched_symbol_files`参数用来缓存，但是问�
 
 我们在这里引入了一个共享的symbols缓存，保存了这份访问记录来避免多个不同调用方依然搜索到同一个符号，以空间换时间。实现方案比较简单。
 
-内网工程实测，下来可以减少10-20秒的第一次访问开销，而每个symbol缓存占据字节约为8KB，一次调试周期约10万个符号占据800MB，对于Mac设备这种有虚拟内存的设备来说，内存压力不算很大。另外，也提供了关闭的开关。
+内部工程实测，下来可以减少10-20秒的第一次访问开销，而每个symbol缓存占据字节约为8KB，一次调试周期约10万个符号占据800MB，对于Mac设备这种有虚拟内存的设备来说，内存压力不算很大。另外，也提供了关闭的开关。
 
 ## 优化不必要的同名symbols查找
 
@@ -297,7 +297,7 @@ LLDB本身是存在一个`searched_symbol_files`参数用来缓存，但是问�
 
 ![](https://lf3-client-infra.bytetos.com/obj/client-infra-images/lizhuoli/f7dac35688c54f2e9ac1a605b4295a39/2022-05-07/16519143338656.png)
 
-内网项目测试这项优化以后，可以减少C++/C/OC类型导入到Swift类型这种场景下，约5-10秒的第一次查找耗时。
+内部项目测试这项优化以后，可以减少C++/C/OC类型导入到Swift类型这种场景下，约5-10秒的第一次查找耗时。
 
 # 其他优化
 
